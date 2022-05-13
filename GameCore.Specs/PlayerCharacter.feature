@@ -1,6 +1,6 @@
 ﻿Feature: PlayerCharacter
 	In order to play the game
-	As a human player
+	As a player
 	I want my character attributes to be correctly represented
 
 Background:
@@ -23,6 +23,7 @@ Scenario: Taking too much damage results in player death
 	Then I should be dead
 
 
+@elf
 Scenario: Elf race characters get additional 20 damage resistance
 		And I have a damage resistance of 10
 		And I'm an Elf
@@ -30,6 +31,7 @@ Scenario: Elf race characters get additional 20 damage resistance
 	Then My health should now be 90
 
 
+@elf
 Scenario: Elf race characters get additional 20 damage resistance (using data table)
 		And I have the following attributes
 		| attribute  | value |
@@ -69,3 +71,11 @@ Scenario: Weapons are worth money
 	| Pick  | 40    |
 	| Knife | 10    |
 	Then My weapons should be worth 100
+
+
+@elf
+Scenario: Elf race characters don't lose magical power
+	Given I'm an Elf
+		And I have an amulet with a power of 200
+	When I use a magical amulet
+	Then The amulet power should not be reduced
